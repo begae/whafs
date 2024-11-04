@@ -3,3 +3,4 @@ blog/migrations
 blog/__pycache__
 env
 whafs/__pycache__
+blog/static/fonts
