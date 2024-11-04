@@ -1,0 +1,5 @@
+whafs/settings.py
+blog/migrations
+blog/__pycache__
+env
+whafs/__pycache__
