@@ -69,7 +69,7 @@ body {
 }
 
 a { 
-    color: lightpink;
+    color: #ffb7df;
     text-decoration: none; 
 }
 
@@ -86,7 +86,6 @@ h2 {
 
 p {
     font-weight: 400;
-    font-size: medium;
 }
 
 #content { 
@@ -99,14 +98,14 @@ p {
     float: right;
     width: 30%;
     padding: 10px;
-    background: #efefef; 
+    background: #ffe1f1; 
     height: 100%;
 }
 
-p.date { 
-    color: gray;
-    font-weight: 300;
-    font-size: small;
+p.date, .info { 
+    color: #333333;
+    font-weight: 200;
+    font-size: 14px;
 }
 
 .left {
@@ -125,7 +124,8 @@ label {
     float:left;
     clear:both;
     color:#333;
-    margin-bottom:4px; 
+    margin-bottom: 4px; 
+    font-size: small;
 }
 input, textarea { 
     clear:both;
@@ -134,15 +134,13 @@ input, textarea {
     background:#ededed;
     border:0;
     padding:6px 10px;
-    font-size:12px;
+    font-size: small;
 }
 input[type=submit] {
-    font-weight:bold;
-    background: coral;
+    font-weight: 700;
+    background: #ff85c8;
     color: white;
     padding:10px 20px;
-    font-size:14px;
-    text-transform:uppercase; 
 }
 .errorlist { 
     color: darkred;
@@ -154,12 +152,4 @@ input[type=submit] {
 /* comments */
 .comment {
     padding:10px;
-}
-.comment:nth-child(even) {
-    background:#efefef;
-}
-.comment .info {
-    font-weight: 400;
-    font-size:12px;
-    color:#666;
 }
