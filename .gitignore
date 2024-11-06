@@ -1,7 +1,6 @@
 whafs/settings.py
 */migrations
-*/__pycache__
-*/*/__pycache__
+**/__pycache__
 env
 blog/static/fonts
 .env
