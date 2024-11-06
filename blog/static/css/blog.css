@@ -102,15 +102,26 @@ p {
     height: 100%;
 }
 
-p.date, .info { 
-    color: #333333;
-    font-weight: 200;
+p.tags {
+    font-weight: 300;
     font-size: 14px;
 }
 
-.left {
-    float:left;
-    margin-right:10px;
+p.help {
+    font-weight: 300;
+    font-size: 14px;
+}
+
+p.links, a.links {
+    line-height: 0.5rem;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+p.date, p.info { 
+    color: #333333;
+    font-weight: 200;
+    font-size: 14px;
 }
 
 /* pagination */

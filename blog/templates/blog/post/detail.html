@@ -1,16 +1,23 @@
 {% extends "blog/base.html" %}
+{% load blog_tags %}
 {% block title %}{{ post.title }}{% endblock %}
 {% block content %}
 <h1>{{ post.title }}</h1>
 <p class="date">
     Published by {{ post.author }}, {{ post.published }}
 </p>
-{{ post.body|linebreaks }}
+{{ post.body|markdown }}
 <p>
     <a href="{% url "blog:post_share" post.id %}">
         Share this post
     </a>
 </p>
+<h2>Related posts</h2>
+{% for post in related_posts %}
+<p class="links"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></p>
+{% empty %}
+<p class="help">There are no related posts yet.</p>
+{% endfor %}
 {% with comments.count as total_comments %}
 <h2>
     {{ total_comments }} comment{{ total_comments|pluralize }}
@@ -24,7 +31,7 @@
     {{ comment.body|linebreaks }}
 </div>
 {% empty %}
-<p>There are no comments.</p>
+<p class="help">There are no comments.</p>
 {% endfor %}
 {% include "blog/post/includes/comment_form.html" %}
 {% endblock %}

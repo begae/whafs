@@ -1,13 +1,19 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import get_object_or_404, render
 from django.core.mail import send_mail
+from django.db.models import Count
 from django.views.decorators.http import require_POST
+from taggit.models import Tag
 from .models import Post
 from .forms import EmailPostForm, CommentForm
 
 
-def post_list(request):
+def post_list(request, tag_slug=None):
     all_posts = Post.published_objects.all()
+    tag = None
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        all_posts = all_posts.filter(tags__in=[tag])
     paginator = Paginator(all_posts, 5)
     page_number = request.GET.get('page', 1)
     try:
@@ -16,14 +22,18 @@ def post_list(request):
         posts = paginator.page(1)
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
-    return render(request, 'blog/post/list.html', {'posts': posts})
+    return render(request, 'blog/post/list.html', {'posts': posts, 'tag': tag})
 
 
 def post_detail(request, slug):
     post = get_object_or_404(Post, status=Post.Status.PUBLISHED, slug=slug)
     comments = post.comments.filter(active=True)
     form = CommentForm()
-    return render(request, 'blog/post/detail.html', {'post': post, 'comments': comments, 'form': form})
+    post_tags_ids = post.tags.values_list('id', flat=True)
+    related_posts = Post.published_objects.filter(tags__in=post_tags_ids).exclude(id=post.id)
+    related_posts = related_posts.annotate(same_tags=Count('tags')).order_by('-same_tags', '-published')[:5]
+    return render(request, 'blog/post/detail.html', 
+                  {'post': post, 'comments': comments, 'form': form, 'related_posts': related_posts})
 
 
 def post_share(request, post_id):
