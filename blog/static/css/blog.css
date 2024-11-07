@@ -69,19 +69,27 @@ body {
 }
 
 a { 
-    color: #ffb7df;
+    color: #8d8a86;
     text-decoration: none; 
 }
 
 h1 { 
     font-weight: 800;
-    border-bottom: 1px solid #bbb;
+    border-bottom: 1px solid #8d8a86;
     padding:0 0 10px 0;
 }
 
 h2 {
-    font-weight: 600;
+    font-weight: 700;
     margin:30px 0 0;
+}
+
+h3 {
+    font-weight: 600;
+}
+
+h4 {
+    font-weight: 500;
 }
 
 p {
@@ -98,8 +106,28 @@ p {
     float: right;
     width: 30%;
     padding: 10px;
-    background: #ffe1f1; 
+    background: #d8d9d7; 
     height: 100%;
+}
+
+a.listitem1 {
+    color: #b4d999;
+}
+
+a.listitem2 {
+    color: #91afd7;
+}
+
+a.listitem3 {
+    color: #ffdc7e;
+}
+
+a.listitem4 {
+    color: #beb1d5;
+}
+
+a.listitem0 {
+    color: #e8879c;
 }
 
 p.tags {
@@ -119,7 +147,7 @@ p.links, a.links {
 }
 
 p.date, p.info { 
-    color: #333333;
+    color: #8d8a86;
     font-weight: 200;
     font-size: 14px;
 }
@@ -134,7 +162,7 @@ p.date, p.info {
 label { 
     float:left;
     clear:both;
-    color:#333;
+    color: #8d8a86;
     margin-bottom: 4px; 
     font-size: small;
 }
@@ -142,19 +170,19 @@ input, textarea {
     clear:both;
     float:left;
     margin:0 0 10px;
-    background:#ededed;
+    background:#d8d9d7;
     border:0;
     padding:6px 10px;
     font-size: small;
 }
 input[type=submit] {
     font-weight: 700;
-    background: #ff85c8;
+    background: #8d8a86;
     color: white;
     padding:10px 20px;
 }
 .errorlist { 
-    color: darkred;
+    color: #ffa389;
     float:left;
     clear:both;
     padding-left:10px; 

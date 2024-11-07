@@ -4,9 +4,9 @@
 {% block content %}
     {% if keywords %}
     <h1>Posts containing "{{ keywords }}"</h1>
-    <h3>Found {{ results.count }} result{{results.count|pluralize }}</h3>
+    <h2>Found {{ results.count }} result{{results.count|pluralize }}</h2>
     {% for post in results %}
-    <h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
+    <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
     <p class="tags">Tags: 
         {% for tag in post.tags.all %}
         <a href="{% url "blog:post_list_tagged" tag.slug %}">
@@ -18,7 +18,7 @@
     {% empty %}
     <p class="help">There are no results for your keywords.</p>
     {% endfor %}
-    <p><a class="links" href="{% url "blog:post_search" %}">Search again</a></p>
+    <h4><a class="links" href="{% url "blog:post_search" %}">Search again</a></h4>
     {% else %}
     <h1>Search for posts</h1>
     <form method="get">

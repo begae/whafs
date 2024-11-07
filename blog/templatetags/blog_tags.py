@@ -23,3 +23,8 @@ def show_featured_posts(count=5):
 @register.filter(name='markdown')
 def markdown_format(text):
     return mark_safe(markdown.markdown(text))
+
+
+@register.filter
+def modulo(num, val):
+    return num % val
