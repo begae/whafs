@@ -15,3 +15,7 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ['by_name', 'by_email', 'body']
         labels = {'by_name': 'Your name', 'by_email': 'Your email'}
+
+
+class SearchForm(forms.Form):
+    keywords = forms.CharField()

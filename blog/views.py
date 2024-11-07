@@ -3,9 +3,10 @@ from django.shortcuts import get_object_or_404, render
 from django.core.mail import send_mail
 from django.db.models import Count
 from django.views.decorators.http import require_POST
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank, TrigramSimilarity
 from taggit.models import Tag
 from .models import Post
-from .forms import EmailPostForm, CommentForm
+from .forms import EmailPostForm, CommentForm, SearchForm
 
 
 def post_list(request, tag_slug=None):
@@ -25,8 +26,8 @@ def post_list(request, tag_slug=None):
     return render(request, 'blog/post/list.html', {'posts': posts, 'tag': tag})
 
 
-def post_detail(request, slug):
-    post = get_object_or_404(Post, status=Post.Status.PUBLISHED, slug=slug)
+def post_detail(request, post_id, slug):
+    post = get_object_or_404(Post, id=post_id, status=Post.Status.PUBLISHED)
     comments = post.comments.filter(active=True)
     form = CommentForm()
     post_tags_ids = post.tags.values_list('id', flat=True)
@@ -63,3 +64,22 @@ def post_comment(request, post_id):
         comment.on_post = post
         comment.save()
     return render(request, 'blog/post/comment.html', {'post': post, 'form': form, 'comment': comment})
+
+
+def post_search(request):
+    form = SearchForm()
+    keywords = None
+    results = set()
+    if 'keywords' in request.GET:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            keywords = form.cleaned_data['keywords']
+            search_vector = SearchVector('title', weight='A') + SearchVector('body', weight='B')
+            search_keywords = SearchQuery(keywords)
+            results |= set(Post.published_objects.annotate(search=search_vector, rank=SearchRank(search_vector, search_keywords),
+                                                      ).filter(rank__gte=0.3).order_by('-rank'))
+            results |= set(Post.published_objects.annotate(similarity=TrigramSimilarity('title', keywords),
+                                                      ).filter(similarity__gt=0.1).order_by('-similarity'))
+            for keyword in keywords.split():
+                results |= set(Post.published_objects.filter(tags__name__icontains=keyword))
+    return render(request, 'blog/post/search.html', {'form': form, 'keywords': keywords, 'results': results})
