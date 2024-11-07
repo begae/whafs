@@ -1,0 +1,357 @@
+@font-face {
+    font-family: 'Barlow';
+    src: url('../fonts/Barlow-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Barlow';
+    src: url('../fonts/Barlow-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Barlow';
+    src: url('../fonts/Barlow-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Barlow';
+    src: url('../fonts/Barlow-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Barlow';
+    src: url('../fonts/Barlow-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Barlow';
+    src: url('../fonts/Barlow-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Barlow';
+    src: url('../fonts/Barlow-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Barlow';
+    src: url('../fonts/Barlow-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Barlow';
+    src: url('../fonts/Barlow-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    padding:0;
+    font-family: 'Barlow', sans-serif;
+}
+
+a {
+    color:#8d8a86;
+    text-decoration:none;
+}
+
+a:hover {
+    color:#ffdc7e;
+}
+
+h1 {
+    font-weight: 800;
+    border-bottom:1px solid #8d8a86;
+    padding:0 0 10px 0;
+    margin:10px 0 20px 0;
+}
+
+h2 {
+    font-weight: 700;
+    margin:30px 0 20px;
+}
+
+h3 {
+    font-weight: 600;
+}
+
+h4 {
+    font-weight: 500;
+}
+
+p {
+    font-weight: 400;
+}
+
+ol {
+    line-height: 1.5;
+}
+
+#header {
+    padding: 30px 100px;
+    margin-bottom: 30px;
+    background: #d8d9d7;
+    color: #e8879c;
+    overflow: auto;
+}
+
+#header .logo {
+    color: black;
+    font-size: x-large;
+    font-weight: 700;
+    float: left;
+    margin-right: 10%;
+}
+
+#header ul.menu {
+    list-style:none;
+    float:left;
+    margin:0;
+    padding:0;
+}
+#header ul.menu li {
+    float:left;
+    padding:4px 10px;
+}
+
+#header ul.menu li.selected a, #header ul.menu li.selected a:hover {
+    color: #91afd7;
+    font-weight: 500;
+}
+
+#header a {
+    color: #beb1d5;
+}
+#header a:hover {
+    color: #b4d999;
+}
+
+#header .user {
+    float:right;
+    padding-top:4px;
+}
+
+#header .user form {
+    display:inline;
+    float:right;
+}
+
+#header .user button {
+    background:none;
+    color:#d8d9d7;
+    border:none;
+    cursor:pointer;
+    float:left;
+    display:inline;
+}
+
+#content {
+    padding:30px 100px;
+}
+
+/* forms */
+form {
+    overflow:auto;
+}
+
+form p {
+    width:100%;
+    overflow:auto;
+}
+
+label {
+    float:left;
+    clear:both;
+    color:#8d8a86;
+    margin-bottom:4px;
+}
+input, textarea {
+    clear:both;
+    float:left;
+    margin:0 0 10px;
+    background:#d8d9d7;
+    border:0;
+    padding:6px 10px;
+    font-size:14px;
+}
+input[type=submit], a.button {
+    font-weight:bold;
+    background:#8d8a86;
+    color:#d8d9d7;
+    padding:10px 20px;
+    font-size:14px;
+    text-transform:uppercase;
+}
+.errorlist {
+    color:#e8879c;
+    float:left;
+    clear:both;
+    padding-left:10px;
+}
+.helptext {
+    margin:0 0 20px 0;
+    color:#91afd7;
+    clear:both;
+    float:left;
+    font-size:13px;
+}
+/* messages */
+ul.messages {
+    margin:10px 100px;
+    padding:0;
+    list-style-type:
+    none;
+}
+ul.messages li.success,
+ul.messages li.warning,
+ul.messages li.error,
+ul.messages li.info {
+    margin:0;
+    padding:14px 20px;
+    list-style:none;
+    color:#d8d9d7;
+}
+
+ul.messages li.success { background:#b4d999; }
+ul.messages li.success a { color:#8d8a86; }
+
+ul.messages li.error { background:#e8879c; color:#8d8a86; }
+ul.messages li.error a { color:#8d8a86; }
+
+ul.messages li.info { background:#91afd7; color:#8d8a86; }
+ul.messages li.info a { color:#8d8a86; }
+
+ul.messages li.warning { background:#ffdc7e; }
+ul.messages li.warning a { color:#8d8a86; }
+
+ul.messages li a.close {
+    margin:0;
+    float:right;
+    opacity:1;
+    border:0;
+    box-shadow:none;
+    text-shadow:none;
+}
+
+.login-form {
+    float:left;
+}
+
+/* social-auth */
+.social {
+    float:right;
+}
+.social li {
+    list-style:none;
+    padding:10px 20px;
+    margin:0 0 10px 0;
+}
+.social li a {
+    width:100%;
+    height:100%;
+    display:block;
+    color:#d8d9d7;
+}
+.social li.google { background:#e8879c; }
+
+
+/* images */
+
+.image-preview, .image-detail {
+    max-width:300px;
+    float:left;
+    margin:0 20px 20px 0;
+}
+.image-detail { margin-top:20px; }
+.image-info div {
+    padding:20px 0;
+    overflow:auto;
+}
+.count {
+    color:#bdc8c5;
+    border:3px solid #d8d9d7;
+    border-radius:26px;
+    padding:10px 20px;
+    margin:20px 10px 0;
+}
+a.like, a.follow { float:right; margin-top:-8px; }
+
+#image-list { overflow:hidden; }
+#image-list .image {
+    float:left;
+    width:220px;
+    height:300px;
+    margin:0 10px 10px 10px;
+    border-top:8px solid #b4d999;
+    background:#d8d9d7;
+}
+#image-list img { width:220px; height:220px; }
+#image-list .info { padding:10px; }
+#image-list .info a { color:#8d8a86; }
+.image-likes div {
+    float:left;
+    width:auto;
+    padding:10px;
+    text-align:center;
+}
+.image-likes img {
+    width:120px;
+    height:120px;
+    border-radius:50%;
+}
+
+/* users */
+#people-list img {
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    margin-bottom:20px;
+}
+#people-list .user {
+    width:180px;
+    float:left;
+    overflow:auto;
+    padding:10px;
+}
+#people-list .info { text-align:center; }
+img.user-detail {
+    border-radius:50%;
+    float:left;
+}
+.profile-info {
+    float:left;
+    overflow:auto;
+    margin-right:20px;
+}
+.image-container { margin-top:40px; }
+
+/* actions */
+.action {
+    clear:both;
+    overflow:auto;
+}
+.action .images {
+    float:left;
+    margin:0 10px 10px 0;
+}
+.action .date {
+    font-style:italic;
+    color:#d8d9d7;
+}

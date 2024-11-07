@@ -2,5 +2,5 @@ whafs/settings.py
 */migrations
 **/__pycache__
 env
-blog/static/fonts
+whafs/static/fonts
 .env
