@@ -4,3 +4,4 @@ whafs/settings.py
 env
 whafs/static/fonts
 .env
+media

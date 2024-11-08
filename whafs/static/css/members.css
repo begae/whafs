@@ -68,12 +68,13 @@ body {
 }
 
 a {
-    color:#8d8a86;
+    color: black;
+    font-weight: 400;
     text-decoration:none;
 }
 
 a:hover {
-    color:#ffdc7e;
+    font-weight: 500;
 }
 
 h1 {
@@ -105,61 +106,61 @@ ol {
 }
 
 #header {
-    padding: 30px 100px;
+    padding: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
     margin-bottom: 30px;
     background: #d8d9d7;
-    color: #e8879c;
     overflow: auto;
 }
 
 #header .logo {
-    color: black;
-    font-size: x-large;
+    font-size: 24px;
     font-weight: 700;
-    float: left;
-    margin-right: 10%;
 }
 
 #header ul.menu {
-    list-style:none;
-    float:left;
-    margin:0;
-    padding:0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
 }
+
 #header ul.menu li {
-    float:left;
-    padding:4px 10px;
+    margin: 0 30px;
 }
 
-#header ul.menu li.selected a, #header ul.menu li.selected a:hover {
-    color: #91afd7;
-    font-weight: 500;
-}
-
-#header a {
-    color: #beb1d5;
-}
-#header a:hover {
-    color: #b4d999;
+#header ul.menu li.selected a {
+    font-weight: 600;
 }
 
 #header .user {
-    float:right;
-    padding-top:4px;
+    font-size: 14px;
 }
 
 #header .user form {
-    display:inline;
-    float:right;
+    display: inline;
 }
 
 #header .user button {
-    background:none;
-    color:#d8d9d7;
-    border:none;
-    cursor:pointer;
-    float:left;
-    display:inline;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: inline;
+}
+
+#header .user button:hover {
+    text-decoration: underline;
 }
 
 #content {
@@ -197,7 +198,6 @@ input[type=submit], a.button {
     color:#d8d9d7;
     padding:10px 20px;
     font-size:14px;
-    text-transform:uppercase;
 }
 .errorlist {
     color:#e8879c;
@@ -207,7 +207,6 @@ input[type=submit], a.button {
 }
 .helptext {
     margin:0 0 20px 0;
-    color:#91afd7;
     clear:both;
     float:left;
     font-size:13px;
