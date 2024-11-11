@@ -69,17 +69,14 @@ def post_comment(request, post_id):
 def post_search(request):
     form = SearchForm()
     keywords = None
-    results = set()
+    results = []
     if 'keywords' in request.GET:
         form = SearchForm(request.GET)
         if form.is_valid():
             keywords = form.cleaned_data['keywords']
             search_vector = SearchVector('title', weight='A') + SearchVector('body', weight='B')
             search_keywords = SearchQuery(keywords)
-            results |= set(Post.published_objects.annotate(search=search_vector, rank=SearchRank(search_vector, search_keywords),
-                                                      ).filter(rank__gte=0.3).order_by('-rank'))
-            results |= set(Post.published_objects.annotate(similarity=TrigramSimilarity('title', keywords),
-                                                      ).filter(similarity__gt=0.1).order_by('-similarity'))
-            for keyword in keywords.split():
-                results |= set(Post.published_objects.filter(tags__name__icontains=keyword))
+            results = Post.published_objects.annotate(
+                search=search_vector, 
+                rank=SearchRank(search_vector, search_keywords)).filter(rank__gte=0.3).order_by('-rank')
     return render(request, 'blog/post/search.html', {'form': form, 'keywords': keywords, 'results': results})

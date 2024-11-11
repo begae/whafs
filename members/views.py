@@ -1,7 +1,10 @@
 from django.shortcuts import render
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.views.decorators.http import require_GET
+from decouple import config
 from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
 from .models import Profile
 
@@ -47,6 +50,9 @@ def edit(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
+            messages.success(request, 'Profile updated succesfully')
+        else:
+            messages.error(request, 'Error updating your profile')
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)
@@ -56,3 +62,13 @@ def edit(request):
 @login_required
 def dashboard(request):
     return render(request, 'members/dashboard.html', {'section': 'dashboard'})
+
+
+security_text_content = '\n'.join([config('SECURITY_TEXT_1'), 
+                                   config('SECURITY_TEXT_2'), 
+                                   config('SECURITY_TEXT_3')])
+
+
+@require_GET
+def security_text(request):
+    return HttpResponse(security_text_content, content_type="text/plain")

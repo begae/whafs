@@ -111,7 +111,6 @@ ol {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    margin-bottom: 30px;
     background: #d8d9d7;
     overflow: auto;
 }
@@ -213,34 +212,33 @@ input[type=submit], a.button {
 }
 /* messages */
 ul.messages {
-    margin:10px 100px;
-    padding:0;
-    list-style-type:
-    none;
+    font-family: "Barlow", sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    margin: 10px 100px;
+    padding: 0;
+    list-style-type: none;
 }
 ul.messages li.success,
 ul.messages li.warning,
 ul.messages li.error,
 ul.messages li.info {
-    margin:0;
-    padding:14px 20px;
-    list-style:none;
-    color:#d8d9d7;
+    margin: 0;
+    padding: 10px;
+    list-style: none;
+    color: #fff;
 }
 
-ul.messages li.success { background:#b4d999; }
-ul.messages li.success a { color:#8d8a86; }
+ul.messages li.success { background: #b4d999; }
 
-ul.messages li.error { background:#e8879c; color:#8d8a86; }
-ul.messages li.error a { color:#8d8a86; }
+ul.messages li.error { background:#e8879c; }
 
-ul.messages li.info { background:#91afd7; color:#8d8a86; }
-ul.messages li.info a { color:#8d8a86; }
+ul.messages li.info { background:#91afd7; }
 
 ul.messages li.warning { background:#ffdc7e; }
-ul.messages li.warning a { color:#8d8a86; }
 
 ul.messages li a.close {
+    color: #fff;
     margin:0;
     float:right;
     opacity:1;
