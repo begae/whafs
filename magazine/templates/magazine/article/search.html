@@ -1,0 +1,29 @@
+{% extends "magazine/base.html" %}
+{% load magazine_tags %}
+{% block title %}Search{% endblock %}
+{% block content %}
+    {% if keywords %}
+    <h1>Articles containing "{{ keywords }}"</h1>
+    <h2>Found {{ results.count }} result{{results.count|pluralize }}</h2>
+    {% for article in results %}
+    <h3><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h3>
+    <p class="tags">Tags: 
+        {% for tag in article.tags.all %}
+        <a href="{% url "magazine:article_list_tagged" tag.slug %}">
+            {{ tag.name }}
+        </a>{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+    {{ article.body|markdown|truncatewords_html:12 }}
+    {% empty %}
+    <p class="help">There are no results for your keywords.</p>
+    {% endfor %}
+    <h4><a class="links" href="{% url "magazine:article_search" %}">Search again</a></h4>
+    {% else %}
+    <h1>Search for articles</h1>
+    <form method="get">
+        {{ form.as_p }}
+        <input type="submit" value="Search">
+    </form>
+    {% endif %}
+{% endblock %}

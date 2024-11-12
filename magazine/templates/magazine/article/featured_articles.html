@@ -1,0 +1,16 @@
+<h3>Latest articles</h3>
+<ul>
+    {% for article in latest_articles %}
+    <li>
+        <a class="links" href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+<h3>Most commented articles</h3>
+<ul>
+    {% for article in most_commented_articles %}
+    <li>
+        <a class="links" href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+    </li>
+    {% endfor %}
+</ul>

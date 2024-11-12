@@ -15,7 +15,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('members/', include('members.urls')),
     path('social-auth/', include('social_django.urls', namespace='social')),
+    
     path('blog/', include('blog.urls')),
+    path('magazine/', include('magazine.urls')),
+
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemaps'),
     path('.well-known/pki-validation/81DF1464E0015B7B229467B5D8DAE86E.txt/', security_text),
 ]

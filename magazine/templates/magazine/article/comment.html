@@ -1,0 +1,10 @@
+{% extends "magazine/base.html" %}
+{% block title %}Add a comment{% endblock %}
+{% block content %}
+    {% if comment %}
+    <h2>Your comment has been added.</h2>
+    <p><a href="{{ article.get_absolute_url }}">Back to the article</a></p>
+    {% else %}
+        {% include "magazine/article/includes/comment_form.html" %}
+    {% endif %}
+{% endblock %}

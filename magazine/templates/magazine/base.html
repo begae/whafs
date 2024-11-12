@@ -1,0 +1,23 @@
+{% load magazine_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <link href="{% static "css/magazine.css" %}" rel="stylesheet">
+    </head>
+    <body>
+        <div id="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <div id="sidebar">
+            <h2>whafs magazine</h2>
+            <p>
+                This is us, with {% total_articles %} articles published so far. 
+                <a class="links" href="{% url "magazine:article_feed" %}">Subscribe</a>
+            </p>
+            {% show_featured_articles 3 %}
+        </div>
+    </body>
+</html>
