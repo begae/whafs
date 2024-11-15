@@ -2,7 +2,7 @@
 <ul>
     {% for article in latest_articles %}
     <li>
-        <a class="links" href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+        <a class="title-links" href="{{ article.get_absolute_url }}">{{ article.title }}</a>
     </li>
     {% endfor %}
 </ul>
@@ -10,7 +10,7 @@
 <ul>
     {% for article in most_commented_articles %}
     <li>
-        <a class="links" href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+        <a class="title-links" href="{{ article.get_absolute_url }}">{{ article.title }}</a>
     </li>
     {% endfor %}
 </ul>

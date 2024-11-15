@@ -60,7 +60,7 @@ def article_share(request, article_id):
 def article_comment(request, article_id):
     article = get_object_or_404(Article, id=article_id, status=Article.Status.PUBLISHED)
     comment = None
-    form = CommentForm(data=request.article)
+    form = CommentForm(data=request.POST)
     if form.is_valid():
         comment = form.save(commit=False)
         comment.on_article = article

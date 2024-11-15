@@ -13,9 +13,11 @@
     </a>{% if not forloop.last %}, {% endif %}
     {% endfor %}
 </p>
+<div class="article-body">
 {{ article.body|markdown }}
+</div>
 {% with total_likes=article.users_liked.count users_liked=article.users_liked.all %}
-    <div class="count">
+    <div class="counter">
       <span class="count"><span class="total">{{ total_likes }}</span> like{{ total_likes|pluralize }}</span>
         <a href="#" class="likebutton" data-id="{{ article.id }}" data-action="{% if request.user in users_liked %}Unlike{% else %}Like{% endif %}">
             {% if request.user not in users_liked %}
@@ -25,13 +27,6 @@
             {% endif %}
         </a>
       </div>
-    <div class="article-likes">
-      <p class="users-liked">{% for user in users_liked %}
-        {{ user.first_name }}<br>
-      {% empty %}
-        Be the first one to like this article!
-      {% endfor %}</p>
-    </div>
   {% endwith %}
 <p>
     <a href="{% url "magazine:article_share" article.id %}">
@@ -40,22 +35,15 @@
 </p>
 <h2>Related articles</h2>
 {% for article in related_articles %}
-<p class="links"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></p>
+<p><a class="title-links" href="{{ article.get_absolute_url }}">{{ article.title }}</a></p>
 {% empty %}
 <p class="help">There are no related articles yet.</p>
 {% endfor %}
-{% with comments.count as total_comments %}
-<h2>
-    {{ total_comments }} comment{{ total_comments|pluralize }}
-</h2>
-{% endwith %}
+<h2>{{ comments.count }} comment{{ comments.count|pluralize }}</h2>
 {% for comment in comments %}
-<div class="comment">
-    <p class="info">
-        Comment {{ forloop.counter }} by {{comment.by_name}}, {{ comment.created }}
-    </p>
-    {{ comment.body|linebreaks }}
-</div>
+  <p><span class="comment-info" id="comment-info{{ forloop.counter|modulo:5 }}">
+    Comment {{ forloop.counter }} by {{comment.by_name}}, {{ comment.created }}</span>
+  {{ comment.body|linebreaks }}</p>
 {% empty %}
 <p class="help">There are no comments.</p>
 {% endfor %}

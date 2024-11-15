@@ -61,10 +61,23 @@
     font-style: normal;
 }
 
-body { 
+body {
+    display: flex;
+    flex-direction: row;
     margin: 0;
     padding: 0;
     font-family: 'Barlow', sans-serif;
+}
+
+#sidebar { 
+    width: 25%;
+    padding: 50px;
+    background: #d8d9d7; 
+}
+
+#content {
+    width: 75%;
+    padding: 50px; 
 }
 
 a { 
@@ -95,79 +108,82 @@ p {
     font-weight: 400;
 }
 
-#content { 
-    float: left;
-    width: 60%;
-    padding: 0 0 0 30px; 
+.article-body {
+    padding-top: 10px;
 }
 
-#sidebar { 
-    float: right;
-    width: 30%;
-    padding: 10px;
-    background: #d8d9d7; 
-    height: 100%;
+.counter {
+    padding-top: 30px;
 }
 
-a.listitem1 {
+.listitem1 {
     color: #b4d999;
 }
 
-a.listitem2 {
+.listitem2 {
     color: #91afd7;
 }
 
-a.listitem3 {
+.listitem3 {
     color: #ffdc7e;
 }
 
-a.listitem4 {
+.listitem4 {
     color: #beb1d5;
 }
 
-a.listitem0 {
+.listitem0 {
     color: #e8879c;
 }
 
-a.likebutton {
+.likebutton {
+    color: black;
     font-weight: 500;
 }
 
-p.tags {
-    font-weight: 300;
-    font-size: 14px;
-}
-
-p.help {
-    font-weight: 300;
-    font-size: 14px;
-}
-
-p.links, a.links {
-    line-height: 0.5rem;
+.title-links {
     font-weight: 500;
     font-size: 15px;
 }
 
-p.date, p.info { 
-    color: #8d8a86;
-    font-weight: 200;
-    font-size: 14px;
-}
-
-p.users-liked {
+.tags, .help, .date, .info, .comment-info {
     font-weight: 300;
     font-size: 14px;
-    padding-left: 20px;
 }
 
-/* pagination */
+.date, .info { 
+    color: #8d8a86;
+}
+
+#comment-info1 {
+    color: #b4d999;
+}
+
+#comment-info2 {
+    color: #91afd7;
+}
+
+#comment-info3 {
+    color: #ffdc7e;
+}
+
+#comment-info4 {
+    color: #beb1d5;
+}
+
+#comment-info0 {
+    color: #e8879c;
+}
+
+.total {
+    font-weight: 600;
+}
+
 .pagination { 
     margin:40px 0; 
     font-weight: 600;
 }
 
-/* forms */
 label { 
     float:left;
     clear:both;
@@ -175,6 +191,7 @@ label {
     margin-bottom: 4px; 
     font-size: small;
 }
+
 input, textarea { 
     clear:both;
     float:left;
@@ -184,20 +201,17 @@ input, textarea {
     padding:6px 10px;
     font-size: small;
 }
+
 input[type=submit] {
     font-weight: 700;
     background: #8d8a86;
     color: white;
     padding:10px 20px;
 }
+
 .errorlist { 
     color: #ffa389;
     float:left;
     clear:both;
     padding-left:10px; 
-}
-
-/* comments */
-.comment {
-    padding:10px;
 }

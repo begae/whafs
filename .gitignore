@@ -1,7 +1,7 @@
 */migrations
 **/__pycache__
 env
-whafs/static/fonts
+**/fonts
 .env
 media
 **/ssl
