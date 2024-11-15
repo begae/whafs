@@ -2,7 +2,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import get_object_or_404, render
 from django.core.mail import send_mail
 from django.db.models import Count
+from django.http import JsonResponse
 from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank, TrigramSimilarity
 from taggit.models import Tag
 from .models import Post
@@ -35,6 +37,24 @@ def post_detail(request, post_id, slug):
     related_posts = related_posts.annotate(same_tags=Count('tags')).order_by('-same_tags', '-published')[:5]
     return render(request, 'blog/post/detail.html', 
                   {'post': post, 'comments': comments, 'form': form, 'related_posts': related_posts})
+
+
+@login_required
+@require_POST
+def post_like(request):
+    post_id = request.POST.get('id')
+    action = request.POST.get('action')
+    if post_id and action:
+        try:
+            article = Post.published_objects.get(id=post_id)
+            if action == 'Like':
+                article.users_liked.add(request.user)
+            else:
+                article.users_liked.remove(request.user)
+            return JsonResponse({'status': 'ok'})
+        except Post.DoesNotExist:
+            pass
+    return JsonResponse({'status': 'error'})
 
 
 def post_share(request, post_id):

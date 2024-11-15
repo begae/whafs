@@ -1,8 +1,10 @@
+from django.http import JsonResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import get_object_or_404, render
 from django.core.mail import send_mail
 from django.db.models import Count
 from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank, TrigramSimilarity
 from taggit.models import Tag
 from .models import Article
@@ -64,6 +66,24 @@ def article_comment(request, article_id):
         comment.on_article = article
         comment.save()
     return render(request, 'magazine/article/comment.html', {'article': article, 'form': form, 'comment': comment})
+
+
+@login_required
+@require_POST
+def article_like(request):
+    article_id = request.POST.get('id')
+    action = request.POST.get('action')
+    if article_id and action:
+        try:
+            article = Article.published_objects.get(id=article_id)
+            if action == 'Like':
+                article.users_liked.add(request.user)
+            else:
+                article.users_liked.remove(request.user)
+            return JsonResponse({'status': 'ok'})
+        except Article.DoesNotExist:
+            pass
+    return JsonResponse({'status': 'error'})
 
 
 def article_search(request):

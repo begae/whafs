@@ -129,6 +129,10 @@ a.listitem0 {
     color: #e8879c;
 }
 
+a.likebutton {
+    font-weight: 500;
+}
+
 p.tags {
     font-weight: 300;
     font-size: 14px;
@@ -149,6 +153,12 @@ p.date, p.info {
     color: #8d8a86;
     font-weight: 200;
     font-size: 14px;
+}
+
+p.users-liked {
+    font-weight: 300;
+    font-size: 14px;
+    padding-left: 20px;
 }
 
 /* pagination */

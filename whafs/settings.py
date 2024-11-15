@@ -24,7 +24,7 @@ LOGGING = {
         "file": {
             "level": "WARNING",
             "class": "logging.FileHandler",
-            "filename": "/home/begae/web/logs/warning.log",
+            "filename": BASE_DIR / "logs/warning.log",
         },
     },
     "loggers": {
@@ -64,7 +64,6 @@ SITE_ID = 1
 
 INSTALLED_APPS = [
     'members.apps.MembersConfig',
-    'django.forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

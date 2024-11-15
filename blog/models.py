@@ -25,7 +25,7 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=2, choices=Status, default=Status.DRAFT)
     tags = TaggableManager()
-    likes = models.IntegerField(default=0)
+    users_liked = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='posts_liked', blank=True)
 
     objects = models.Manager()
     published_objects = PublishedManager()
