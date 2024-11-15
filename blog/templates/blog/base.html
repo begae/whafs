@@ -15,7 +15,7 @@
             <h2>whafs blog</h2>
             <p>
                 This is me, with {% total_posts %} posts written so far. 
-                <a class="links" href="{% url "blog:post_feed" %}">Subscribe</a>
+                <a class="subscribe" href="{% url "blog:post_feed" %}">Subscribe</a>
             </p>
             {% show_featured_posts 3 %}
         </div>

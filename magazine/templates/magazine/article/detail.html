@@ -34,20 +34,26 @@
     </a>
 </p>
 <h2>Related articles</h2>
+<ul class="related-titles">
 {% for article in related_articles %}
-<p><a class="title-links" href="{{ article.get_absolute_url }}">{{ article.title }}</a></p>
+<li><a class="title-links" href="{{ article.get_absolute_url }}">{{ article.title }}</a></li>
 {% empty %}
 <p class="help">There are no related articles yet.</p>
 {% endfor %}
+</ul>
 <h2>{{ comments.count }} comment{{ comments.count|pluralize }}</h2>
+<ul class="comments">
 {% for comment in comments %}
-  <p><span class="comment-info" id="comment-info{{ forloop.counter|modulo:5 }}">
+<li><span class="comment-info" id="comment-info{{ forloop.counter|modulo:5 }}">
     Comment {{ forloop.counter }} by {{comment.by_name}}, {{ comment.created }}</span>
-  {{ comment.body|linebreaks }}</p>
+  {{ comment.body|linebreaks }}</li>
 {% empty %}
 <p class="help">There are no comments.</p>
 {% endfor %}
+</ul>
+<div class="add-comment">
 {% include "magazine/article/includes/comment_form.html" %}
+</div>
 {% endblock %}
 
 {% block domready %}

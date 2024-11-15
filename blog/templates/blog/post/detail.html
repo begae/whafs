@@ -17,16 +17,16 @@
 {{ post.body|markdown }}
 </div>
 {% with total_likes=post.users_liked.count users_liked=post.users_liked.all %}
-    <div class="counter">
-      <span class="count"><span class="total">{{ total_likes }}</span> like{{ total_likes|pluralize }}</span>
-        <a href="#" class="likebutton" data-id="{{ post.id }}" data-action="{% if request.user in users_liked %}Unlike{% else %}Like{% endif %}">
-            {% if request.user not in users_liked %}
-            Like
-            {% else %}
-            Unlike
-            {% endif %}
-        </a>
-      </div>
+<div class="counter">
+  <span class="count"><span class="total">{{ total_likes }}</span> like{{ total_likes|pluralize }}</span>
+  <a href="#" class="likebutton" data-id="{{ post.id }}" data-action="{% if request.user in users_liked %}Unlike{% else %}Like{% endif %}">
+      {% if request.user not in users_liked %}
+      Like
+      {% else %}
+      Unlike
+      {% endif %}
+  </a>
+</div>
   {% endwith %}
 <p>
     <a href="{% url "blog:post_share" post.id %}">
@@ -34,20 +34,26 @@
     </a>
 </p>
 <h2>Related posts</h2>
+<ul class="related-titles">
 {% for post in related_posts %}
-<p><a class="title-links" href="{{ post.get_absolute_url }}">{{ post.title }}</a></p>
+<li><a class="title-links" href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
 {% empty %}
 <p class="help">There are no related posts yet.</p>
 {% endfor %}
+</ul>
 <h2>{{ comments.count }} comment{{ comments.count|pluralize }}</h2>
+<ul class="comments">
 {% for comment in comments %}
-<p><span class="comment-info" id="comment-info{{ forloop.counter|modulo:5 }}">
+<li><span class="comment-info" id="comment-info{{ forloop.counter|modulo:5 }}">
   Comment {{ forloop.counter }} by {{comment.by_name}}, {{ comment.created }}</span>
-  {{ comment.body|linebreaks }}</p>
+  {{ comment.body|linebreaks }}</li>
 {% empty %}
 <p class="help">There are no comments.</p>
 {% endfor %}
+</ul>
+<div class="add-comment">
 {% include "blog/post/includes/comment_form.html" %}
+</div>
 {% endblock %}
 
 {% block domready %}

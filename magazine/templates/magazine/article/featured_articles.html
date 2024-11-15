@@ -1,16 +1,15 @@
+{% load magazine_tags %}
 <h3>Latest articles</h3>
-<ul>
+<ul class="featured">
     {% for article in latest_articles %}
-    <li>
-        <a class="title-links" href="{{ article.get_absolute_url }}">{{ article.title }}</a>
-    </li>
+    <li><a class="title-links" id="title-link-{{ forloop.counter|modulo:5 }}" 
+        href="{{ article.get_absolute_url }}">{{ article.title }}</a></li>
     {% endfor %}
 </ul>
 <h3>Most commented articles</h3>
-<ul>
+<ul class="featured">
     {% for article in most_commented_articles %}
-    <li>
-        <a class="title-links" href="{{ article.get_absolute_url }}">{{ article.title }}</a>
-    </li>
+    <li><a class="title-links" id="title-link-{{ forloop.counter|modulo:5 }}" 
+        href="{{ article.get_absolute_url }}">{{ article.title }}</a></li>
     {% endfor %}
 </ul>

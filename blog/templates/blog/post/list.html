@@ -8,7 +8,7 @@
 {% endif %}
 {% for post in posts %}
 <h2>
-    <a class="listitem{{ forloop.counter|modulo:5 }}" href="{{ post.get_absolute_url }}">
+    <a class="listed-titles" id="list-title-{{ forloop.counter|modulo:5 }}" href="{{ post.get_absolute_url }}">
         {{ post.title }}
     </a>
 </h2>
