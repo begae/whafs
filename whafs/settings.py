@@ -12,18 +12,48 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from decouple import config
+import logging
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+
+class IPAddressFilter(logging.Filter):
+    def filter(self, record):
+        if hasattr(record, 'request') and hasattr(record.request, 'META'):
+            x_forwarded_for = record.request.META.get('HTTP_X_FORWARDED_FOR')
+            if x_forwarded_for:
+                record.ip = x_forwarded_for.split(',')[0]
+            else:
+                record.ip = record.request.META.get('REMOTE_ADDR')
+        else:
+            record.ip = 'unknown'
+        return True
+
+
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
+    "filters": {
+        "add_address": {
+            "()": IPAddressFilter,
+        },
+    },
+    "formatters": {
+        "verbose": {
+            "format": "%(ip)s %(message)s %(asctime)s %(levelname)s %(name)s %(lineno)s",
+        },
+    },
     "handlers": {
         "file": {
             "level": "WARNING",
             "class": "logging.FileHandler",
+            "formatter": "verbose",
+            "filters": ["add_address"],
             "filename": BASE_DIR / "logs/warning.log",
         },
     },
@@ -46,7 +76,6 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'localhost',
     'whafs.ddns.net',
 ]
 
@@ -95,7 +124,7 @@ ROOT_URLCONF = 'whafs.urls'
 
 
 LOGIN_REDIRECT_URL = 'dashboard'
-LOGIN_URL = 'login'
+LOGIN_URL = '/members/login/'
 LOGOUT_URL = 'logout'
 
 

@@ -70,13 +70,13 @@ body {
 }
 
 #sidebar { 
-    width: 25%;
+    width: 20%;
     padding: 50px;
     background: #E5E5E5; 
 }
 
 #content {
-    width: 75%;
+    width: 80%;
     padding: 50px; 
 }
 
@@ -168,7 +168,7 @@ p {
 }
 
 .pagination { 
-    margin-top: 40px; 
+    margin-top: 50px; 
     font-weight: 600;
 }
 

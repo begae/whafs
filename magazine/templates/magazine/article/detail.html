@@ -1,93 +1,57 @@
 {% extends "magazine/base.html" %}
 {% load magazine_tags %}
+{% load static %}
 {% block title %}{{ article.title }}{% endblock %}
 {% block content %}
 <h1>{{ article.title }}</h1>
 <p class="date">
-    Published by {{ article.author }}, {{ article.published }}
+  Published by {{ article.author }}, {{ article.published }}
 </p>
-<p class="tags">Tags: 
-    {% for tag in article.tags.all %}
-    <a href="{% url "magazine:article_list_tagged" tag.slug %}">
-        {{ tag.name }}
-    </a>{% if not forloop.last %}, {% endif %}
-    {% endfor %}
+<p class="tags">Tags:
+  {% for tag in article.tags.all %}
+  <a href="{% url "magazine:article_list_tagged" tag.slug %}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}
+  {% endfor %}
 </p>
 <div class="article-body">
-{{ article.body|markdown }}
+  {{ article.body|markdown }}
 </div>
 {% with total_likes=article.users_liked.count users_liked=article.users_liked.all %}
-    <div class="counter">
-      <span class="count"><span class="total">{{ total_likes }}</span> like{{ total_likes|pluralize }}</span>
-        <a href="#" class="likebutton" data-id="{{ article.id }}" data-action="{% if request.user in users_liked %}Unlike{% else %}Like{% endif %}">
-            {% if request.user not in users_liked %}
-            Like
-            {% else %}
-            Unlike
-            {% endif %}
-        </a>
-      </div>
-  {% endwith %}
-<p>
-    <a href="{% url "magazine:article_share" article.id %}">
-        Share this article
-    </a>
-</p>
+<div class="counter">
+  <span class="count"><span class="total">{{ total_likes }}</span> like{{ total_likes|pluralize }}</span>
+  <a href="#" class="likebutton" data-id="{{ article.id }}"
+    data-action="{% if request.user in users_liked %}Unlike{% else %}Like{% endif %}">
+    {% if request.user not in users_liked %}
+    Like
+    {% else %}
+    Unlike
+    {% endif %}
+  </a>
+</div>
+{% endwith %}
+<p><a href="{% url "magazine:article_share" article.id %}">Share this article</a></p>
 <h2>Related articles</h2>
 <ul class="related-titles">
-{% for article in related_articles %}
-<li><a class="title-links" href="{{ article.get_absolute_url }}">{{ article.title }}</a></li>
-{% empty %}
-<p class="help">There are no related articles yet.</p>
-{% endfor %}
+  {% for article in related_articles %}
+  <li><a class="title-links" href="{{ article.get_absolute_url }}">{{ article.title }}</a></li>
+  {% empty %}
+  <p class="help">There are no related articles yet.</p>
+  {% endfor %}
 </ul>
 <h2>{{ comments.count }} comment{{ comments.count|pluralize }}</h2>
 <ul class="comments">
-{% for comment in comments %}
-<li><span class="comment-info" id="comment-info{{ forloop.counter|modulo:5 }}">
-    Comment {{ forloop.counter }} by {{comment.by_name}}, {{ comment.created }}</span>
-  {{ comment.body|linebreaks }}</li>
-{% empty %}
-<p class="help">There are no comments.</p>
-{% endfor %}
+  {% for comment in comments %}
+  <li><span class="comment-info" id="comment-info{{ forloop.counter|modulo:5 }}">
+      Comment {{ forloop.counter }} by {{comment.by_name}}, {{ comment.created }}</span>
+    {{ comment.body|linebreaks }}</li>
+  {% empty %}
+  <p class="help">There are no comments.</p>
+  {% endfor %}
 </ul>
 <div class="add-comment">
-{% include "magazine/article/includes/comment_form.html" %}
+  {% include "magazine/article/includes/comment_form.html" %}
 </div>
 {% endblock %}
 
 {% block domready %}
-  const url = '{% url "magazine:article_like" %}';
-  var options = {
-    method: 'POST',
-    headers: {'X-CSRFToken': csrftoken},
-    mode: 'same-origin'
-  }
-  document.querySelector('a.likebutton')
-          .addEventListener('click', function(e){
-    e.preventDefault();
-    var likeButton = this;
-    // add request body
-    var formData = new FormData();
-    formData.append('id', likeButton.dataset.id);
-    formData.append('action', likeButton.dataset.action);
-    options['body'] = formData;
-    // send HTTP request
-    fetch(url, options)
-    .then(response => response.json())
-    .then(data => {
-      if (data['status'] === 'ok')
-      {
-        var previousAction = likeButton.dataset.action;
-        // toggle button text and data-action
-        var action = previousAction === 'Like' ? 'Unlike' : 'Like';
-        likeButton.dataset.action = action;
-        likeButton.innerHTML = action;
-        // update like count
-        var likeCount = document.querySelector('span.count .total');
-        var totalLikes = parseInt(likeCount.innerHTML);
-        likeCount.innerHTML = previousAction === 'Like' ? totalLikes + 1 : totalLikes - 1;
-      }
-    })
-  });
+{% include "magazine/article/includes/like_button.html" %}
 {% endblock %}

@@ -1,4 +1,4 @@
-*/migrations
+**/migrations
 **/__pycache__
 env
 **/fonts
@@ -6,3 +6,4 @@ env
 media
 **/ssl
 logs
+.idea
